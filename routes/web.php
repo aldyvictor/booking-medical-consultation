@@ -23,3 +23,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 // Form Login Admin
 Route::get('/login-admin', [App\Http\Controllers\Auth\LoginController::class, 'showLoginFormAdmin'])->name('login-admin');
+
+
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], function() {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard-admin');
+});

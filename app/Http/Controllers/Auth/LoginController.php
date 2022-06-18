@@ -52,10 +52,10 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if($user->role == 'Admin') {
-            return redirect()->intended('dashboard-admin');
+            return redirect()->intended('admin/dashboard');
         }
 
-        if ($user->role == 'User') {
+        if ($user->role == 'Customer') {
             return redirect()->intended('dashboard-user');
         }
     }
