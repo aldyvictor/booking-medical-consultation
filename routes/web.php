@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Form Login Admin
+Route::get('/login-admin', [App\Http\Controllers\Auth\LoginController::class, 'showLoginFormAdmin'])->name('login-admin');
