@@ -51,8 +51,12 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if($user->role == 'Admin') {
+        if($user->role == 'Admin' && url()->previous() == url('/login-admin')) {
             return redirect()->intended('admin/dashboard');
+        }
+
+        if($user->role == 'Customer' && url()->previous() == url('/login-admin')) {
+            return redirect()->intended('/home')->with('Access-Denied', 'You are not allowed to access Admin page');
         }
 
         if ($user->role == 'Customer') {
