@@ -23,33 +23,26 @@
             </li>
             <li class="{{ request()->is('admin/news/*') || request()->is('admin/news') ? 'active' : '' }} nav-item"><a
                     class="d-flex align-items-center" href="/admin/news"><i data-feather="file-text"></i><span
-                        class="menu-title text-truncate">Kategori Dokter</span></a>
+                        class="menu-title text-truncate">Doctor Category</span></a>
             </li>
-            @if (Auth::user()['role'] == 'admin')
-                <li
-                    class="{{ request()->is('admin/menu/*') || request()->is('admin/menu') ? 'active' : '' }} nav-item">
-                    <a class="d-flex align-items-center" href="/admin/menu"><i data-feather='menu'></i><span
-                            class="menu-title text-truncate">Dokter</span></a>
-                </li>
-            @endif
+            <li
+                class="{{ request()->is('admin/menu/*') || request()->is('admin/menu') ? 'active' : '' }} nav-item">
+                <a class="d-flex align-items-center" href="/admin/menu"><i data-feather='menu'></i><span
+                        class="menu-title text-truncate">Doctor</span></a>
+            </li>
             <li class="{{ request()->is('admin/pages/*') || request()->is('admin/pages') ? 'active' : '' }} nav-item">
                 <a class="d-flex align-items-center" href="/admin/pages"><i data-feather='layers'></i><span
-                        class="menu-title text-truncate">Jadwal Dokter</span></a>
+                        class="menu-title text-truncate">Doctor Schedule</span></a>
             </li>
             <li
                 class="{{ request()->is('admin/testimony/*') || request()->is('admin/testimony') ? 'active' : '' }} nav-item">
                 <a class="d-flex align-items-center" href="/admin/testimony"><i data-feather='twitch'></i><span
-                        class="menu-title text-truncate">Pasien</span></a>
+                        class="menu-title text-truncate">Patient</span></a>
             </li>
             <li
                 class="{{ request()->is('admin/galleries/*') || request()->is('admin/galleries') ? 'active' : '' }} nav-item">
                 <a class="d-flex align-items-center" href="/admin/galleries"><i data-feather='camera'></i><span
-                        class="menu-title text-truncate">Jadwal Janji Temu</span></a>
-            </li>
-            <li
-                class="{{ request()->is('admin/featured-sliders/*') || request()->is('admin/featured-sliders') ? 'active' : '' }} nav-item">
-                <a class="d-flex align-items-center" href="/admin/featured-sliders"><i data-feather='image'></i><span
-                        class="menu-title text-truncate">Featured Slider</span></a>
+                        class="menu-title text-truncate">Appointment Schedule</span></a>
             </li>
             @if (Auth::user()['role'] == 'Admin')
                 <li class="{{ request()->is('admin/users') ? 'active' : '' }} nav-item"><a
