@@ -21,8 +21,8 @@
                     <span class="menu-title text-truncate">Dashboard</span>
                 </a>
             </li>
-            <li class="{{ request()->is('admin/news/*') || request()->is('admin/news') ? 'active' : '' }} nav-item"><a
-                    class="d-flex align-items-center" href="/admin/news"><i data-feather="file-text"></i><span
+            <li class="{{ request()->is('admin/doctor-category/*') || request()->is('admin/doctor-category') ? 'active' : '' }} nav-item"><a
+                    class="d-flex align-items-center" href="{{ route('doctor-category.index') }}"><i data-feather="file-text"></i><span
                         class="menu-title text-truncate">Doctor Category</span></a>
             </li>
             <li
