@@ -103,13 +103,13 @@
                                             <div class="col-12">
                                                 <div class="mb-1 row">
                                                     <div class="col-sm-3">
-                                                        <label class="col-form-label" for="doctor_categories_id">
+                                                        <label class="col-form-label" for="doctor_category_id">
                                                             Doctor Category</label>
                                                     </div>
                                                     <div class="col-sm-4">
                                                         <div class="position-relative">
                                                             <select class="select2 form-select select2-hidden-accessible"
-                                                                name="doctor_categories_id" id="select3-basic" data-select2-id="select3-basic"
+                                                                name="doctor_category_id" id="select3-basic" data-select2-id="select3-basic"
                                                                 tabindex="3" aria-hidden="true">
                                                                 <option value="">Choose Category :</option>
                                                                 @foreach ($doctorCategories as $doctorCategory)

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('gender', 45)->nullable();
             $table->string('photo_profile')->nullable();
-            $table->foreignId('doctor_categories_id')->constrained('doctor_categories')->onDelete('cascade');
+            $table->foreignId('doctor_category_id')->constrained('doctor_categories')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();
         });

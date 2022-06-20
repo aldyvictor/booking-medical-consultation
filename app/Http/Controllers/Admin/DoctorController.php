@@ -11,9 +11,22 @@ use App\Models\DoctorCategory;
 
 class DoctorController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.pages.doctor.index');
+        $search = $request->search;
+        $searchCategory = $request->doctor_category;
+        $doctorCategories = DoctorCategory::all();
+        $doctors = Doctor::with('doctorCategory')
+            ->whereHas('doctorCategory', function ($query) use ($request) {
+                $query->where('name', 'like', '%' . $request->doctor_category . '%');
+            })
+            ->where(function ($query) use ($request) {
+                $query->orWhere('name', 'like', '%' . $request->search . '%')
+                ->orWhere('gender', 'like', '%' . $request->search . '%');
+            })
+            ->get();
+
+        return view('admin.pages.doctor.index', compact(['doctors', 'doctorCategories', 'searchCategory', 'search']));
     }
 
     public function create()

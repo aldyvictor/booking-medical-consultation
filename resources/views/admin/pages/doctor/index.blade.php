@@ -49,6 +49,34 @@
                             <div class="card-header border-bottom">
                                 <a class="btn btn-primary" href="{{ route('doctor.create') }}"><i
                                         data-feather='plus'></i> Add Doctor</a>
+                                <div class="col-9">
+                                    <form action="?" method="get" class="ms-auto">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <div class="position-relative">
+                                                    <select class="select2 form-select select2-hidden-accessible"
+                                                        name="doctor_category" id="select3-basic" data-select2-id="select3-basic"
+                                                        tabindex="3" aria-hidden="true">
+                                                        <option value="">Choose Category :</option>
+                                                        @foreach ($doctorCategories as $doctorCategory)
+                                                            <option value="{{ $doctorCategory->name }}" {{ $doctorCategory->name == $searchCategory ? 'selected' : '' }}>{{ $doctorCategory->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <input type="text"
+                                                    id="search" class="form-control" name="search"
+                                                    placeholder="Search" tabindex="1" value="{{ $search }}">
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <button type="submit"
+                                                class="btn btn-primary me-1 waves-effect waves-float waves-light"
+                                                id="submit"><i data-feather='save'></i> Search</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                             <div class="card-datatable">
                                 <div id="DataTables_Table_3_wrapper" class="dataTables_wrapper dt-bootstrap5 px-1">
@@ -61,12 +89,37 @@
                                             <thead>
                                                 <tr role="row">
                                                     <th class="text-center" style="width: 15%">#</th>
-                                                    <th>Category Name</th>
+                                                    <th>Name</th>
+                                                    <th>Category</th>
                                                     <th class="text-center" style="width: 25%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @foreach ($doctors as $key => $doctor)
+                                                    <tr role="row" class="odd">
+                                                        <td class="text-center">{{ $key + 1 }}</td>
+                                                        <td>
+                                                            <span class="avatar me-1 align-bottom">
+                                                                <img class="round" src="{{ Storage::url($doctor->photo_profile) }}" alt="avatar" height="40" width="40">
+                                                            </span>
+                                                            <span class="d-inline-block">
+                                                                <b>{{ $doctor->name }}</b> <br>
+                                                                <small>{{ $doctor->gender }}</small>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            <b>{{ $doctor->doctorCategory->name }}</b>
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="d-inline-flex">
+                                                                <a class="btn btn-warning btn-sm" href="{{ route('doctor-category.edit', $doctor->id) }}"><i data-feather="edit-3"></i></a>
+                                                                <a href="#" data-id="{{ $doctor->id }}" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="btn btn-sm btn-danger ms-1 delete">
+                                                                    <i data-feather="trash-2"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </form>
@@ -108,6 +161,16 @@
 </div>
 @endsection
 
+@push('prepend-style')
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/forms/select/select2.min.css">
+@endpush
+
+@push('prepend-script')
+    <script src="/admin/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+@endpush
+
 @push('append-script')
+    <script src="/admin/app-assets/js/scripts/forms/form-select2.js"></script>
     <script src="/js/custom-delete.js"></script>
 @endpush
+
