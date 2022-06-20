@@ -12,4 +12,9 @@ class DoctorCategory extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function doctors()
+    {
+        return $this->hasMany(Doctor::class);
+    }
 }

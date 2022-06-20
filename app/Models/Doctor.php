@@ -12,4 +12,9 @@ class Doctor extends Model
     protected $guarded = [
         'id',
     ];
+
+    public function doctorCategory()
+    {
+        return $this->belongsTo(DoctorCategory::class);
+    }
 }
