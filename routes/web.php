@@ -27,6 +27,9 @@ Route::get('/login-admin', [App\Http\Controllers\Auth\LoginController::class, 's
 
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], function() {
     Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard-admin');
+    // Doctor Category
     Route::resource('/doctor-category', App\Http\Controllers\Admin\DoctorCategoryController::class);
     Route::post('/doctor-category/delete', [App\Http\Controllers\Admin\DoctorCategoryController::class, 'delete'])->name('doctor-category.delete');
+    // Doctor
+    Route::resource('/doctor', App\Http\Controllers\Admin\DoctorController::class);
 });
