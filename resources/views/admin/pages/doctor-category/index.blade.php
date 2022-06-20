@@ -47,7 +47,7 @@
                         @endif
                         <div class="card">
                             <div class="card-header border-bottom">
-                                <a class="btn btn-info" href="{{ route('doctor-category.create') }}"><i
+                                <a class="btn btn-primary" href="{{ route('doctor-category.create') }}"><i
                                         data-feather='plus'></i> Add Doctor Category</a>
                             </div>
                             <div class="card-datatable">

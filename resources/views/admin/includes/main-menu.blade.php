@@ -26,8 +26,8 @@
                         class="menu-title text-truncate">Doctor Category</span></a>
             </li>
             <li
-                class="{{ request()->is('admin/menu/*') || request()->is('admin/menu') ? 'active' : '' }} nav-item">
-                <a class="d-flex align-items-center" href="/admin/menu"><i data-feather='menu'></i><span
+                class="{{ request()->is('admin/doctor/*') || request()->is('admin/doctor') ? 'active' : '' }} nav-item">
+                <a class="d-flex align-items-center" href="/admin/doctor"><i data-feather='menu'></i><span
                         class="menu-title text-truncate">Doctor</span></a>
             </li>
             <li class="{{ request()->is('admin/pages/*') || request()->is('admin/pages') ? 'active' : '' }} nav-item">
