@@ -28,27 +28,19 @@
                         </div>
                         <span class="avatar">
                             <img class="round"
-                                src="{{ auth()->user() && auth()->user()->avatar != NULL ? auth()->user()->avatar : '/admin/app-assets/images/portrait/small/avatar-s-11.jpg' }}"
+                                src="{{ auth()->user() && auth()->user()->avatar != NULL ? auth()->user()->avatar : '/img/user.png' }}"
                                 alt="avatar" height="40" width="40">
                             <span class="avatar-status-online">
                             </span>
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-                        <a class="dropdown-item" href='{{ url('admin/profile') }}'>
+                        <a class="dropdown-item" href='{{ route('user.edit') }}'>
                             <i class="me-50" data-feather="user">
                             </i> Profile
                         </a>
-                        {{-- <a class="dropdown-item" href="app-chat.html">
-                            <i class="me-50" data-feather="message-square">
-                            </i> Chats
-                        </a> --}}
                         <div class="dropdown-divider">
                         </div>
-                        <a class="dropdown-item" href="page-account-settings-account.html">
-                            <i class="me-50" data-feather="settings">
-                            </i> Settings
-                        </a>
                         <form action="/admin/logout" method="post">
                             @csrf
                             <button type="submit" class="dropdown-item w-100">

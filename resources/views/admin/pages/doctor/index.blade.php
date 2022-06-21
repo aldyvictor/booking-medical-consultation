@@ -100,7 +100,11 @@
                                                         <td class="text-center">{{ $key + 1 }}</td>
                                                         <td>
                                                             <span class="avatar me-1 align-bottom">
-                                                                <img class="round" src="{{ Storage::url($doctor->photo_profile) }}" alt="avatar" height="40" width="40">
+                                                                @if ($doctor->photo_profile)
+                                                                <img class="round" src="../../../storage/{{ $doctor->photo_profile }}" alt="avatar" height="40" width="40">
+                                                                @else
+                                                                <img class="round" src="../../../img/user.png" alt="avatar" height="40" width="40">
+                                                                @endif
                                                             </span>
                                                             <span class="d-inline-block">
                                                                 <b>{{ $doctor->name }}</b> <br>

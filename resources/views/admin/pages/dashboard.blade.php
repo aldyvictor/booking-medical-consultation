@@ -31,63 +31,68 @@
                             <div class="card card-statistics">
                                 <div class="card-header">
                                     <h4 class="card-title">Statistics</h4>
-                                    <div class="d-flex align-items-center">
-                                        <p class="card-text font-small-2 me-25 mb-0">7 Days Period</p>
-                                    </div>
                                 </div>
                                 <div class="card-body statistics-body">
                                     <div class="row">
                                         <div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-                                            <div class="d-flex flex-row">
-                                                <div class="avatar bg-light-primary me-2">
-                                                    <div class="avatar-content">
-                                                        <i data-feather="file-text" class="avatar-icon"></i>
+                                            <a href="{{ route('doctor-category.index') }}">
+                                                <div class="d-flex flex-row">
+                                                    <div class="avatar bg-light-primary me-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="file-text" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="my-auto">
+                                                        <h4 class="fw-bolder mb-0">{{ $doctorCategory->count() }}</h4>
+                                                        <p class="card-text text-black font-small-3 mb-0"><b>Doctor Category</b></p>
                                                     </div>
                                                 </div>
-                                                <div class="my-auto">
-                                                    <h4 class="fw-bolder mb-0"></h4>
-                                                    <p class="card-text font-small-3 mb-0">Posts</p>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                         <div class="col-md-3 col-sm-6 col-12 mb-2 mb-md-0">
-                                            <div class="d-flex flex-row">
-                                                <div class="avatar bg-light-info me-2">
-                                                    <div class="avatar-content">
-                                                        <i data-feather="users" class="avatar-icon"></i>
+                                            <a href="{{ route('doctor.index') }}">
+                                                <div class="d-flex flex-row">
+                                                    <div class="avatar bg-light-info me-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="users" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="my-auto">
+                                                        <h4 class="fw-bolder mb-0">{{ $doctor->count() }}</h4>
+                                                        <p class="card-text text-black font-small-3 mb-0"><b>Doctor</b></p>
                                                     </div>
                                                 </div>
-                                                <div class="my-auto">
-                                                    <h4 class="fw-bolder mb-0"></h4>
-                                                    <p class="card-text font-small-3 mb-0">Visitors</p>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                         <div class="col-md-3 col-sm-6 col-12 mb-2 mb-sm-0">
-                                            <div class="d-flex flex-row">
-                                                <div class="avatar bg-light-danger me-2">
-                                                    <div class="avatar-content">
-                                                        <i data-feather="twitch" class="avatar-icon"></i>
+                                            <a href="{{ route('schedule-doctor.index') }}">
+                                                <div class="d-flex flex-row">
+                                                    <div class="avatar bg-light-danger me-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="calendar" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="my-auto">
+                                                        <h4 class="fw-bolder mb-0">{{ $scheduleDoctor->count() }}</h4>
+                                                        <p class="card-text text-black font-small-3 mb-0"><b>Doctor Schedule</b></p>
                                                     </div>
                                                 </div>
-                                                <div class="my-auto">
-                                                    <h4 class="fw-bolder mb-0"></h4>
-                                                    <p class="card-text font-small-3 mb-0">Testimony</p>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                         <div class="col-md-3 col-sm-6 col-12">
-                                            <div class="d-flex flex-row">
-                                                <div class="avatar bg-light-success me-2">
-                                                    <div class="avatar-content">
-                                                        <i data-feather="message-square" class="avatar-icon"></i>
+                                            <a href="{{ route('customer.index') }}">
+                                                <div class="d-flex flex-row">
+                                                    <div class="avatar bg-light-success me-2">
+                                                        <div class="avatar-content">
+                                                            <i data-feather="users" class="avatar-icon"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="my-auto">
+                                                        <h4 class="fw-bolder mb-0">{{ $customer->count() }}</h4>
+                                                        <p class="card-text text-black font-small-3 mb-0"><b>Customer</b></p>
                                                     </div>
                                                 </div>
-                                                <div class="my-auto">
-                                                    <h4 class="fw-bolder mb-0"></h4>
-                                                    <p class="card-text font-small-3 mb-0">Feedback</p>
-                                                </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

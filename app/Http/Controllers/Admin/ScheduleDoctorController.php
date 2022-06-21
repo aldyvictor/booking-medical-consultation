@@ -31,7 +31,7 @@ class ScheduleDoctorController extends Controller
                         $query->orWhere('date', 'like', '%' . $request->date . '%');
                     })
                     ->orderBy('date', 'desc')
-                    ->paginate(10);
+                    ->paginate(5);
 
         return view('admin.pages.schedule-doctor.index', compact([
             'schedules',
