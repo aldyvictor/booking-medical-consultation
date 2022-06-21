@@ -144,7 +144,7 @@
                 <h5 class="modal-title" id="myModalLabel120">Delete</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="" method="POST">
+            <form action="{{ route('doctor.delete') }}" method="POST">
                 @csrf
                 <input id="id" name="id" hidden>
                 <div class="modal-body">

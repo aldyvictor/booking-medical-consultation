@@ -32,4 +32,5 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     Route::post('/doctor-category/delete', [App\Http\Controllers\Admin\DoctorCategoryController::class, 'delete'])->name('doctor-category.delete');
     // Doctor
     Route::resource('/doctor', App\Http\Controllers\Admin\DoctorController::class);
+    Route::post('/doctor/delete', [App\Http\Controllers\Admin\DoctorController::class, 'delete'])->name('doctor.delete');
 });

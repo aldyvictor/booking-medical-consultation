@@ -8,7 +8,6 @@ use App\Http\Requests\DoctorRequest;
 
 use App\Models\Doctor;
 use App\Models\DoctorCategory;
-use Illuminate\Support\Facades\File;
 
 class DoctorController extends Controller
 {
@@ -72,6 +71,18 @@ class DoctorController extends Controller
             return redirect()->route('doctor.index')->with('success', 'Doctor updated successfully.');
         } catch (\Throwable $th) {
             return redirect()->route('doctor.edit')->with('error', 'Something went wrong.');
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+            $doctor = Doctor::find($request->id);
+            $doctor->delete();
+
+            return redirect()->route('doctor.index')->with('success', 'Doctor deleted successfully.');
+        } catch (\Throwable $th) {
+            return redirect()->route('doctor.index')->with('error', 'Something went wrong.');
         }
     }
 
