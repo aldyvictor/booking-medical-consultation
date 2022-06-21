@@ -112,7 +112,7 @@
                                                         </td>
                                                         <td class="text-center">
                                                             <div class="d-inline-flex">
-                                                                <a class="btn btn-warning btn-sm" href="{{ route('doctor-category.edit', $doctor->id) }}"><i data-feather="edit-3"></i></a>
+                                                                <a class="btn btn-warning btn-sm" href="{{ route('doctor.edit', $doctor->id) }}"><i data-feather="edit-3"></i></a>
                                                                 <a href="#" data-id="{{ $doctor->id }}" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="btn btn-sm btn-danger ms-1 delete">
                                                                     <i data-feather="trash-2"></i>
                                                                 </a>
@@ -144,7 +144,7 @@
                 <h5 class="modal-title" id="myModalLabel120">Delete</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('doctor-category.delete') }}" method="POST">
+            <form action="" method="POST">
                 @csrf
                 <input id="id" name="id" hidden>
                 <div class="modal-body">

@@ -30,7 +30,7 @@ class DoctorRequest extends FormRequest
             'photo_profile' => 'image|max:1000|mimes:png,jpg,jpeg',
             'name' => 'required|string|max:255',
             'gender' => 'nullable|string',
-            'doctor_categories_id' => 'required|exists:doctor_categories,id'
+            'doctor_category_id' => 'required|exists:doctor_categories,id'
         ];
     }
 }

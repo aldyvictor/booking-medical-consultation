@@ -8,6 +8,7 @@ use App\Http\Requests\DoctorRequest;
 
 use App\Models\Doctor;
 use App\Models\DoctorCategory;
+use Illuminate\Support\Facades\File;
 
 class DoctorController extends Controller
 {
@@ -46,6 +47,31 @@ class DoctorController extends Controller
             return redirect()->route('doctor.index')->with('success', 'Doctor created successfully.');
         } catch (\Throwable $th) {
             return redirect()->route('doctor.create')->with('error', 'Something went wrong.');
+        }
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $doctor = Doctor::find($id);
+        $doctorCategories = DoctorCategory::all();
+        $doctorCategory = DoctorCategory::find($doctor->doctor_categories_id);
+
+        return view('admin.pages.doctor.edit', compact(['doctor', 'doctorCategories']));
+    }
+
+    public function update(DoctorRequest $request, $id)
+    {
+        try {
+            $doctor = Doctor::find($id);
+            $doctor->update($request->all());
+            if ($request->photo_profile) {
+                $doctor->photo_profile = $request->file('photo_profile')->store('img/doctors', 'public');
+            }
+            $doctor->save();
+
+            return redirect()->route('doctor.index')->with('success', 'Doctor updated successfully.');
+        } catch (\Throwable $th) {
+            return redirect()->route('doctor.edit')->with('error', 'Something went wrong.');
         }
     }
 

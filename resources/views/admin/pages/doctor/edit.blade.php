@@ -1,7 +1,7 @@
 @extends('admin.layouts.master-admin')
 
 @section('title')
-    Create Doctor
+    Edit Doctor
 @endsection
 
 @section('content')
@@ -41,8 +41,9 @@
                             @endif
                             <div class="card">
                                 <div class="card-body">
-                                    <form class="form form-horizontal" action="{{ route('doctor.store') }}" method="POST" enctype="multipart/form-data">
+                                    <form class="form form-horizontal" action="{{ route('doctor.update', $doctor->id) }}" method="POST" enctype="multipart/form-data">
                                         @csrf
+                                        @method('PUT')
                                         <div class="row">
                                             <div class="col-md-12 mb-1">
                                                 <div class="row">
@@ -51,11 +52,19 @@
                                                     </div>
                                                     <div class="col-md-9">
                                                         <div class="d-flex mb-1">
-                                                                <img src="{{ old('photo_profile', '../../../img/file-upload.png') }}"
+                                                            @if ($doctor->photo_profile)
+                                                               <img src="{{ old('photo_profile', '../../../storage/'.$doctor->photo_profile) }}"
+                                                                    id="photo_profile_review"
+                                                                    class="uploadedAvatar rounded me-50 border-3"
+                                                                    alt="profile image" height="100" width="100"
+                                                                    style="border-style: none">
+                                                            @else
+                                                            <img src="{{ old('photo_profile', '../../../../../../img/file-upload.png') }}"
                                                                     id="photo_profile_review"
                                                                     class="uploadedAvatar rounded me-50 border-3"
                                                                     alt="profile image" height="100" width="100"
                                                                     style="border-style: dashed">
+                                                            @endif
                                                             <div class="d-flex align-items-end mt-75 ms-1">
                                                                 <div>
                                                                     <input id="photo_profile" name="photo_profile" class="btn btn-sm btn-primary mb-75 me-75 waves-effect waves-float waves-light" type="file" accept="image/*" tabindex="0">
@@ -75,7 +84,7 @@
                                                             Name</label>
                                                     </div>
                                                     <div class="col-sm-6">
-                                                        <input type="text" value="{{ old('name', '') }}"
+                                                        <input type="text" value="{{ old('name', $doctor->name) }}"
                                                             id="name" class="form-control" name="name"
                                                             placeholder="Name" tabindex="1" required>
                                                     </div>
@@ -93,8 +102,8 @@
                                                                 name="gender" id="select2-basic" data-select2-id="select2-basic"
                                                                 tabindex="2" aria-hidden="true">
                                                                 <option value="">Choose Gender :</option>
-                                                                <option value="Laki-laki">Laki-laki</option>
-                                                                <option value="Perempuan">Perempuan</option>
+                                                                <option value="Laki-laki" {{ $doctor->gender == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                                                                <option value="Perempuan" {{ $doctor->gender == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -110,10 +119,10 @@
                                                         <div class="position-relative">
                                                             <select class="select2 form-select select2-hidden-accessible"
                                                                 name="doctor_category_id" id="select3-basic" data-select2-id="select3-basic"
-                                                                tabindex="3" aria-hidden="true" required>
+                                                                tabindex="3" aria-hidden="true">
                                                                 <option value="">Choose Category :</option>
                                                                 @foreach ($doctorCategories as $doctorCategory)
-                                                                    <option value="{{ $doctorCategory->id }}">{{ $doctorCategory->name }}</option>
+                                                                    <option value="{{ $doctorCategory->id }}" {{ $doctor->doctor_category_id == $doctorCategory->id ? 'selected' : '' }} >{{ $doctorCategory->name }}</option>
                                                                 @endforeach
                                                             </select>
                                                         </div>
