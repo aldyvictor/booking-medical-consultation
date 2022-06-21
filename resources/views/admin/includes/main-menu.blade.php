@@ -30,8 +30,8 @@
                 <a class="d-flex align-items-center" href="/admin/doctor"><i data-feather='menu'></i><span
                         class="menu-title text-truncate">Doctor</span></a>
             </li>
-            <li class="{{ request()->is('admin/pages/*') || request()->is('admin/pages') ? 'active' : '' }} nav-item">
-                <a class="d-flex align-items-center" href="/admin/pages"><i data-feather='layers'></i><span
+            <li class="{{ request()->is('admin/schedule-doctor/*') || request()->is('admin/schedule-doctor') ? 'active' : '' }} nav-item">
+                <a class="d-flex align-items-center" href="{{ route('schedule-doctor.index') }}"><i data-feather='layers'></i><span
                         class="menu-title text-truncate">Doctor Schedule</span></a>
             </li>
             <li

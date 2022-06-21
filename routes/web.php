@@ -33,4 +33,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'isAdmin']], functio
     // Doctor
     Route::resource('/doctor', App\Http\Controllers\Admin\DoctorController::class);
     Route::post('/doctor/delete', [App\Http\Controllers\Admin\DoctorController::class, 'delete'])->name('doctor.delete');
+    // Schedule Doctor
+    Route::resource('/schedule-doctor', App\Http\Controllers\Admin\ScheduleDoctorController::class);
+    Route::post('/schedule-doctor/delete', [App\Http\Controllers\Admin\ScheduleDoctorController::class, 'delete'])->name('schedule-doctor.delete');
 });

@@ -1,7 +1,7 @@
 @extends('admin.layouts.master-admin')
 
 @section('title')
-    Data Doctor
+    Data Doctor Schedule
 @endsection
 
 @section('content')
@@ -9,12 +9,12 @@
     <div class="content-header-left col-md-9 col-12 mb-2">
         <div class="row breadcrumbs-top">
             <div class="col-12">
-                <h2 class="content-header-title float-start mb-0">Doctor</h2>
+                <h2 class="content-header-title float-start mb-0">Doctor Schedule</h2>
                 <div class="breadcrumb-wrapper">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/admin">Home</a>
                         </li>
-                        <li class="breadcrumb-item active">Doctor
+                        <li class="breadcrumb-item active">Doctor Schedule
                         </li>
                     </ol>
                 </div>
@@ -47,12 +47,12 @@
                         @endif
                         <div class="card">
                             <div class="card-header border-bottom">
-                                <a class="btn btn-primary" href="{{ route('doctor.create') }}"><i
-                                        data-feather='plus'></i> Add Doctor</a>
+                                <a class="btn btn-primary" href="{{ route('schedule-doctor.create') }}"><i
+                                        data-feather='plus'></i> Add Doctor Schedule</a>
                                 <div class="col-9">
                                     <form action="?" method="get" class="ms-auto">
                                         <div class="row">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <div class="position-relative">
                                                     <select class="select2 form-select select2-hidden-accessible"
                                                         name="doctor_category" id="select3-basic" data-select2-id="select3-basic"
@@ -64,10 +64,19 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class="col-sm-5">
+                                            <div class="col-sm-3">
+                                                <div class="input-group input-group-merge">
+                                                    <span class="input-group-text" id="basic-addon5"
+                                                        style="padding: 0.571rem 0.5rem"><i
+                                                            data-feather='calendar'></i></span>
+                                                    <input value="{{ $searchDate }}" name="date" type="text"
+                                                        id="fp-default" required class="form-control bg-white flatpickr-basic flatpickr-input" tabindex="1" placeholder="YYYY-MM-DD">
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-3">
                                                 <input type="text"
                                                     id="search" class="form-control" name="search"
-                                                    placeholder="Search" tabindex="1" value="{{ $search }}">
+                                                    placeholder="Search Doctor" tabindex="1" value="{{ $search }}">
                                             </div>
                                             <div class="col-sm-3">
                                                 <button type="submit"
@@ -89,37 +98,41 @@
                                             <thead>
                                                 <tr role="row">
                                                     <th class="text-center" style="width: 15%">#</th>
-                                                    <th>Name</th>
-                                                    <th>Category</th>
+                                                    <th style="width: 25%">Name</th>
+                                                    <th>Date</th>
+                                                    <th style="width: 15%">Session</th>
                                                     <th class="text-center" style="width: 25%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($doctors as $key => $doctor)
-                                                    <tr role="row" class="odd">
-                                                        <td class="text-center">{{ $key + 1 }}</td>
-                                                        <td>
-                                                            <span class="avatar me-1 align-bottom">
-                                                                <img class="round" src="{{ Storage::url($doctor->photo_profile) }}" alt="avatar" height="40" width="40">
-                                                            </span>
-                                                            <span class="d-inline-block">
-                                                                <b>{{ $doctor->name }}</b> <br>
-                                                                <small>{{ $doctor->gender }}</small>
-                                                            </span>
-                                                        </td>
-                                                        <td>
-                                                            <b>{{ $doctor->doctorCategory->name }}</b>
-                                                        </td>
-                                                        <td class="text-center">
-                                                            <div class="d-inline-flex">
-                                                                <a class="btn btn-warning btn-sm" href="{{ route('doctor.edit', $doctor->id) }}"><i data-feather="edit-3"></i></a>
-                                                                <a href="#" data-id="{{ $doctor->id }}" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="btn btn-sm btn-danger ms-1 delete">
-                                                                    <i data-feather="trash-2"></i>
-                                                                </a>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                @endforeach
+                                            @foreach ($schedules as $key => $schedule)
+                                                <tr role="row" class="odd">
+                                                    <td class="text-center">{{ $key + 1 }}</td>
+                                                    <td>
+                                                        <span class="avatar me-1 align-bottom">
+                                                            <img class="round" src="{{ Storage::url($schedule->doctor->photo_profile) }}" alt="avatar" height="40" width="40">
+                                                        </span>
+                                                        <span class="d-inline-block">
+                                                            <b>{{ $schedule->doctor->name }}</b> <br>
+                                                            <small>{{ $schedule->doctor->doctorCategory->name }}</small>
+                                                        </span>
+                                                    </td>
+                                                    <td>
+                                                        {{ date('l ,d F Y', strtotime($schedule->date)) }}
+                                                    </td>
+                                                    <td>
+                                                        <b>{{ date('H:i', strtotime($schedule->start_time)) }} - {{ date('H:i', strtotime($schedule->end_time)) }}</b>
+                                                    </td>
+                                                    <td class="text-center">
+                                                        <div class="d-inline-flex">
+                                                            <a class="btn btn-warning btn-sm" href="{{ route('schedule-doctor.edit', $schedule->id) }}"><i data-feather="edit-3"></i></a>
+                                                            <a href="#" data-id="{{ $schedule->id }}" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="btn btn-sm btn-danger ms-1 delete">
+                                                                <i data-feather="trash-2"></i>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                             </tbody>
                                         </table>
                                     </form>
@@ -144,7 +157,7 @@
                 <h5 class="modal-title" id="myModalLabel120">Delete</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('doctor.delete') }}" method="POST">
+            <form action="{{ route('schedule-doctor.delete') }}" method="POST">
                 @csrf
                 <input id="id" name="id" hidden>
                 <div class="modal-body">
@@ -162,15 +175,26 @@
 @endsection
 
 @push('prepend-style')
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
     <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/forms/select/select2.min.css">
 @endpush
 
+@push('append-style')
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/css/plugins/forms/pickers/form-pickadate.css">
+@endpush
+
 @push('prepend-script')
+    <script src="/admin/app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
     <script src="/admin/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
 @endpush
 
 @push('append-script')
+    <script src="/admin/app-assets/js/scripts/forms/pickers/form-pickers.js"></script>
     <script src="/admin/app-assets/js/scripts/forms/form-select2.js"></script>
     <script src="/js/custom-delete.js"></script>
 @endpush
-
