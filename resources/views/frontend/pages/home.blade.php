@@ -5,6 +5,22 @@
 @endsection
 
 @section('content')
+@if (session('success'))
+    <div class="modal fade modal-danger text-start show" id="confirm-delete" tabindex="-1" aria-labelledby="myModalLabel120"
+    style="display: none;" aria-modal="true" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel120">Delete</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <p>
+                {{ session('success') }}
+            </p>
+        </div>
+    </div>
+</div>
+@endif
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
 <div class="container">
@@ -114,49 +130,47 @@
             <p>Buat janji temu dengan mudah hanya dengan mengisi for di bawah dan pilih jadwal sesukamu</p>
         </div>
 
-        @auth
+        {{-- @auth
             <form action="" method="post" role="form" class="php-email-form">
                 <div class="row">
-                <div class="col-md-4 form-group">
-                    <input type="text" value="{{ old('name', auth())->user()->name }}" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                    <div class="validate"></div>
-                </div>
-                <div class="col-md-4 form-group mt-3 mt-md-0">
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-                    <div class="validate"></div>
-                </div>
-                <div class="col-md-4 form-group mt-3 mt-md-0">
-                    <input type="tel" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                    <div class="validate"></div>
-                </div>
-                </div>
-                <div class="row">
-                <div class="col-md-4 form-group mt-3">
-                    <input type="datetime" name="date" class="form-control datepicker" id="date" placeholder="Appointment Date" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
-                    <div class="validate"></div>
-                </div>
-                <div class="col-md-4 form-group mt-3">
-                    <select name="department" id="department" class="form-select">
-                    <option value="">Select Department</option>
-                    <option value="Department 1">Department 1</option>
-                    <option value="Department 2">Department 2</option>
-                    <option value="Department 3">Department 3</option>
-                    </select>
-                    <div class="validate"></div>
-                </div>
-                <div class="col-md-4 form-group mt-3">
-                    <select name="doctor" id="doctor" class="form-select">
-                    <option value="">Select Doctor</option>
-                    <option value="Doctor 1">Doctor 1</option>
-                    <option value="Doctor 2">Doctor 2</option>
-                    <option value="Doctor 3">Doctor 3</option>
-                    </select>
-                    <div class="validate"></div>
-                </div>
+                    <div class="col-md-3 form-group mt-3">
+                        <input value="" name="date" type="text"
+                        id="fp-default" required class="form-control bg-white flatpickr-basic flatpickr-input" tabindex="1" placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="col-md-3 form-group mt-3">
+                        <div class="position-relative">
+                            <select class="select2 form-select select2-hidden-accessible"
+                                name="doctor_category" id="select3-basic" data-select2-id="select3-basic"
+                                tabindex="3" aria-hidden="true">
+                                <option value="">All Category :</option>
+                                @foreach ($doctorCategories as $doctorCategory)
+                                    <option value="{{ $doctorCategory->name }}" {{ $doctorCategory->name == $searchCategory ? 'selected' : '' }}>{{ $doctorCategory->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3 form-group mt-3">
+                        <select name="department" id="department" class="form-select">
+                            <option value="">Select Department</option>
+                            <option value="Department 1">Department 1</option>
+                            <option value="Department 2">Department 2</option>
+                            <option value="Department 3">Department 3</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
+                    <div class="col-md-3 form-group mt-3">
+                        <select name="doctor" id="doctor" class="form-select">
+                        <option value="">Select Doctor</option>
+                        <option value="Doctor 1">Doctor 1</option>
+                        <option value="Doctor 2">Doctor 2</option>
+                        <option value="Doctor 3">Doctor 3</option>
+                        </select>
+                        <div class="validate"></div>
+                    </div>
                 </div>
 
                 <div class="form-group mt-3">
-                <textarea class="form-control" name="message" rows="5" placeholder="Message (Optional)"></textarea>
+                <textarea class="form-control" name="message" rows="5" placeholder="Pesan Keluhan ( Opsional )"></textarea>
                 <div class="validate"></div>
                 </div>
                 <div class="mb-3">
@@ -218,7 +232,7 @@
                 </div>
                 <div class="text-center"><button type="submit">Make an Appointment</button></div>
             </form>
-        @endauth
+        @endauth --}}
 
         </div>
     </section><!-- End Appointment Section -->
@@ -438,3 +452,28 @@
 </main><!-- End #main -->
 
 @endsection
+
+@push('prepend-style')
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/pickers/pickadate/pickadate.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/vendors/css/forms/select/select2.min.css">
+@endpush
+
+@push('append-style')
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
+    <link rel="stylesheet" type="text/css" href="/admin/app-assets/css/plugins/forms/pickers/form-pickadate.css">
+@endpush
+
+@push('prepend-script')
+    <script src="/admin/app-assets/vendors/js/vendors.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/pickadate/picker.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/pickadate/picker.date.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/pickadate/legacy.js"></script>
+    <script src="/admin/app-assets/vendors/js/pickers/flatpickr/flatpickr.min.js"></script>
+    <script src="/admin/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+@endpush
+
+@push('append-script')
+    <script src="/admin/app-assets/js/scripts/forms/pickers/form-pickers.js"></script>
+    <script src="/admin/app-assets/js/scripts/forms/form-select2.js"></script>
+@endpush

@@ -14,11 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\HomePageController::class, 'index'])->name('home');
+Route::get('/schedule/{doctor_id}', [App\Http\Controllers\HomePageController::class, 'showSchedule'])->name('schedule-show');
+Route::get('/doctor-list', [App\Http\Controllers\HomePageController::class, 'showDoctor'])->name('doctor-show');
 
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('profile/edit', [App\Http\Controllers\CustomerController::class, 'edit'])->name('profile.edit');
+    Route::post('profile/edit', [App\Http\Controllers\CustomerController::class, 'update'])->name('profile.update');
+
+    // Appointment
+    Route::get('/appointment/{schedule_id}', [App\Http\Controllers\HomePageController::class, 'createAppointment'])->name('appointment-create');
+    Route::post('/appointment', [App\Http\Controllers\HomePageController::class, 'storeAppointment'])->name('appointment-store');
+    Route::get('/appointment/success', [App\Http\Controllers\HomePageController::class, 'createAppointmentSuccess'])->name('appointment-create-success');
 });
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

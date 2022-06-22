@@ -73,7 +73,7 @@
                                     @csrf
                                     <div class="mb-1">
                                         <label class="form-label" for="email">Email</label>
-                                        <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" name="email" placeholder="Email" aria-describedby="email" autofocus="" tabindex="1" />
+                                        <input class="form-control @error('email') is-invalid @enderror" id="email" type="email" name="email" placeholder="Email" aria-describedby="email" autofocus="" value="{{ old('email', '') }}" tabindex="1" />
                                         @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

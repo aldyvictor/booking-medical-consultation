@@ -21,16 +21,95 @@
 
             <div class="col-lg-12 mt-4 mt-lg-0">
                 <div class="member d-block align-items-start">
+                    @if (session('success'))
+                        <div class="alert alert-success" role="alert">
+                            <h4 class="alert-heading">Success</h4>
+                            <div class="alert-body">
+                                {{ session('success') }}
+                            </div>
+                        </div>
+                    @endif
+                    <form action="{{ route('profile.update') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-3">
-                            <div class="pic"><img src="/frontend/assets/img/doctors/doctors-2.jpg" class="img-fluid" alt=""></div>
+                            <div class="pic">
+                                @if (auth()->user()->avatar)
+                                <img src="../../../storage/{{ auth()->user()->avatar }}" class="img-fluid" alt="" id="photo_profile_review">
+                                @else
+                                <img src="/img/user.png" class="img-fluid" alt="" id="photo_profile_review">
+                                @endif
+                            </div>
+                            <div>
+                                <input id="photo_profile" name="avatar" class="btn btn-sm btn-primary w-75 mb-75 mt-3    me-75 waves-effect waves-float waves-light" type="file" accept="image/*" tabindex="0">
+                                <p class="mb-0">Allowed file types: png, jpg,
+                                    jpeg.</p>
+                                <p class="mb-0 text-danger">Optimal Image Resolution 600 x 600 and Max. 1MB</p>
+                            </div>
                         </div>
                         <div class="col-lg-9">
                             <div class="member-info">
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
-                                        <label for="name">Nama</label>
-                                        <input type="text" class="form-control" name="name">
+                                        <label for="name" class="text-gray-800">Nama</label>
+                                        <input type="text" class="form-control" name="name" value="{{ auth()->user()->name }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="email" class="text-gray-800">Email</label>
+                                        <input type="text" class="form-control" name="email" value="{{ auth()->user()->email }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="phone_number" class="text-gray-800">No HP</label>
+                                        <input type="text" class="form-control" name="phone_number" value="{{ auth()->user()->phone_number }}" required>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="gender" class="text-gray-800">Jenis Kelamin</label>
+                                        <select name="gender" id="gender" class="form-select">
+                                            @php
+                                                $val = old('gender', auth()->user()->gender)
+                                            @endphp
+                                            <option value="">Pilih Jenis Kelamin</option>
+                                            <option value="Laki-laki" {{ $val == 'Laki-laki' ? 'selected' : '' }} >Laki-laki</option>
+                                            <option value="Perempuan" {{ $val == 'Perempuan' ? 'selected' : '' }} >Perempuan</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="address" class="text-gray-800">Alamat</label>
+                                        <textarea class="form-control" name="address" rows="5" placeholder="Alamat">{!! auth()->user()->address !!}</textarea>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="password" class="text-gray-800">Password Baru</label>
+                                        <input type="password" class="form-control" name="password" value="">
+                                        <small>Kosongkan jika tidak ingin di ganti</small>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <label for="repassword" class="text-gray-800">Konfirmasi Password</label>
+                                        <input type="password" class="form-control" name="repassword" value="">
+                                        <small>Kosongkan jika tidak ingin di ganti</small>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-block btn-primary">Simpan</button>
                                     </div>
                                 </div>
                                 {{-- <h4>Sarah Jhonson</h4>
@@ -45,6 +124,7 @@
                             </div>
                         </div>
                     </div>
+                    </form>
                 </div>
             </div>
 
@@ -102,3 +182,25 @@
 </main><!-- End #main -->
 
 @endsection
+
+@push('append-script')
+    <script src="/admin/app-assets/vendors/js/vendors.min.js"></script>
+@endpush
+
+@push('append-script')
+    <script>
+        //file input preview
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                            $('#photo_profile_review    ').attr('src', e.target.result).attr('style', 'border-style: none');
+                    }
+                    reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#photo_profile").change(function(){
+                readURL(this);
+        });
+    </script>
+@endpush

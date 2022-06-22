@@ -7,9 +7,8 @@
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#departments">Kategori Dokter</a></li>
-          <li><a class="nav-link scrollto" href="#doctors">Cari Dokter</a></li>
+          <li><a class="nav-link scrollto active" href="/">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ route('doctor-show') }}">Lihat Jadwal Dokter</a></li>
           <li><a class="nav-link scrollto" href="#contact">Kontak</a></li>
           @auth
           <li class="dropdown"><a href="#"><span>{{ auth()->user()->name }}</span> <i class="bi bi-chevron-down"></i></a>
@@ -39,7 +38,7 @@
       </nav><!-- .navbar -->
 
       @auth
-          <a href="" class="appointment-btn scrollto"><span class="d-none d-md-inline">Buat</span> Janji Temu</a>
+          <a href="{{ route('doctor-show') }}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Buat</span> Janji Temu</a>
       @else
           <a href="{{ route('register') }}" class="appointment-btn scrollto"><span class="d-none d-md-inline">Buat</span> Akun</a>
       @endauth
