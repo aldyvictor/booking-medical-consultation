@@ -60,7 +60,7 @@ class LoginController extends Controller
         }
 
         if ($user->role == 'Customer') {
-            return redirect()->intended('dashboard-user');
+            return redirect()->intended('/');
         }
     }
 }

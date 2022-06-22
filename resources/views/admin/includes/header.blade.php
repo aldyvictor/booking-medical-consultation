@@ -41,12 +41,15 @@
                         </a>
                         <div class="dropdown-divider">
                         </div>
-                        <form action="/admin/logout" method="post">
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                             <i class="me-50" data-feather="power">
+                                </i> {{ __('Logout') }}
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                             @csrf
-                            <button type="submit" class="dropdown-item w-100">
-                                <i class="me-50" data-feather="power">
-                                </i> Logout
-                            </button>
                         </form>
                     </div>
                 </li>

@@ -92,7 +92,7 @@ $(function () {
     if (prefixMask.length) {
         new Cleave(prefixMask, {
             prefix: "+62",
-            blocks: [3, 3, 3, 4],
+            blocks: [3, 4, 4, 4],
             uppercase: true,
         });
     }

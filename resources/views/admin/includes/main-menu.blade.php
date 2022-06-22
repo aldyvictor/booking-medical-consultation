@@ -44,12 +44,6 @@
                 <a class="d-flex align-items-center" href="/admin/galleries"><i data-feather='calendar'></i><span
                         class="menu-title text-truncate">Appointment Schedule</span></a>
             </li>
-            @if (Auth::user()['role'] == 'Admin')
-                <li class="{{ request()->is('admin/users') ? 'active' : '' }} nav-item"><a
-                        class="d-flex align-items-center" href="/admin/users"><i data-feather='users'></i><span
-                            class="menu-title text-truncate">Users</span></a>
-                </li>
-            @endif
         </ul>
     </div>
 </div>
