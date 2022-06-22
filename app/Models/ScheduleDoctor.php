@@ -20,6 +20,6 @@ class ScheduleDoctor extends Model
 
     public function appointment()
     {
-        return $this->hasMany(Appointment::class);
+        return $this->hasMany(Appointment::class, 'id', 'schedule_id');
     }
 }

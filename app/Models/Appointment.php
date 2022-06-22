@@ -17,11 +17,11 @@ class Appointment extends Model
 
      public function schedules()
      {
-        return $this->belongsTo(ScheduleDoctor::class);
+        return $this->belongsTo(ScheduleDoctor::class, 'schedule_id', 'id');
      }
 
      public function users()
      {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id', 'id');
      }
 }

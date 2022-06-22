@@ -61,12 +61,45 @@
                                             <thead>
                                                 <tr role="row">
                                                     <th class="text-center" style="width: 15%">#</th>
-                                                    <th>Category Name</th>
+                                                    <th>Name</th>
+                                                    <th>Email</th>
+                                                    <th>Phone Number</th>
                                                     <th class="text-center" style="width: 25%">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @foreach ($customers as $key => $customer)
+                                                    <tr role="row" class="odd">
+                                                        <td class="text-center">{{ $key + 1 }}</td>
+                                                        <td>
+                                                            <span class="avatar me-1 align-bottom">
+                                                                @if ($customer->photo_profile)
+                                                                <img class="round" src="../../../storage/{{ $customer->avatar }}" alt="avatar" height="40" width="40">
+                                                                @else
+                                                                <img class="round" src="../../../img/user.png" alt="avatar" height="40" width="40">
+                                                                @endif
+                                                            </span>
+                                                            <span class="d-inline-block">
+                                                                <b>{{ $customer->name }}</b> <br>
+                                                                <small>{{ $customer->gender }}</small>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            {{ $customer->email }}
+                                                        </td>
+                                                        <td>
+                                                            {{ $customer->phone_number }}
+                                                        </td>
+                                                        <td class="text-center">
+                                                            <div class="d-inline-flex">
+                                                                {{-- <a class="btn btn-warning btn-sm" href="{{ route('doctor.edit', $customer->id) }}"><i data-feather="edit-3"></i></a> --}}
+                                                                <a href="#" data-id="{{ $customer->id }}" data-bs-toggle="modal" data-bs-target="#confirm-delete" class="btn btn-sm btn-danger ms-1 delete">
+                                                                    <i data-feather="trash-2"></i>
+                                                                </a>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </form>
@@ -91,7 +124,7 @@
                 <h5 class="modal-title" id="myModalLabel120">Delete</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('doctor-category.delete') }}" method="POST">
+            <form action="{{ route('customer.delete') }}" method="POST">
                 @csrf
                 <input id="id" name="id" hidden>
                 <div class="modal-body">

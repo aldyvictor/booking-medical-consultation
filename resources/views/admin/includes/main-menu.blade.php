@@ -40,8 +40,8 @@
                         class="menu-title text-truncate">Customer</span></a>
             </li>
             <li
-                class="{{ request()->is('admin/galleries/*') || request()->is('admin/galleries') ? 'active' : '' }} nav-item">
-                <a class="d-flex align-items-center" href="/admin/galleries"><i data-feather='calendar'></i><span
+                class="{{ request()->is('admin/appointment/*') || request()->is('admin/appointment') ? 'active' : '' }} nav-item">
+                <a class="d-flex align-items-center" href="{{ route('appointment.index') }}"><i data-feather='calendar'></i><span
                         class="menu-title text-truncate">Appointment Schedule</span></a>
             </li>
         </ul>
